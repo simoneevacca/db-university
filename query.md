@@ -10,12 +10,13 @@
 
 # 3 Selezionare tutti gli studenti che hanno più di 30 anni
 
-    SELECT * FROM `students` WHERE DATEDIFF('2024-04-24',`date_of_birth`)/365 > 30;
+    SELECT * FROM `students` WHERE DATEDIFF(current_date,`date_of_birth`)/365 > 30;
+    SELECT * FROM `students` WHERE year(current_date) - year(`date_of_birth`) > 30;
 
 
 # 4 Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 
-    SELECT * FROM `courses` WHERE `degree_id` = 3 AND `year` = 1 AND `period` = 'I semestre';   ?????????????????????????????????????????????
+    SELECT * FROM `courses` WHERE `degree_id` = 3 AND `year` = 1 AND `period` = 'I semestre';
 
 
 # 5 Selezionare tutti gli appelli d'esame che avvengono nel pomeriggio (dopo le 14) del 20/06/2020 (21)
