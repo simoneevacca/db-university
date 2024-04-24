@@ -10,8 +10,9 @@
 
 # 3 Selezionare tutti gli studenti che hanno più di 30 anni
 
-    SELECT * FROM `students` WHERE DATEDIFF(current_date,`date_of_birth`)/365 > 30;
-    SELECT * FROM `students` WHERE year(current_date) - year(`date_of_birth`) > 30;
+    SELECT * FROM `students` WHERE TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) > 30;
+<!-- SELECT * FROM `students` WHERE DATEDIFF(current_date,`date_of_birth`)/365 > 30; --> non tiene conto degli anni bisestili
+<!-- SELECT * FROM `students` WHERE year(current_date) - year(`date_of_birth`) > 30; --> non tiene conto di mesi e giorni
 
 
 # 4 Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
