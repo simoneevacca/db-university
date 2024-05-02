@@ -2,10 +2,9 @@
 
 # 1 Contare quanti iscritti ci sono stati ogni anno
 
-    SELECT COUNT(`id`), `enrolment_date` 
+    SELECT COUNT(`id`), YEAR(`enrolment_date`) 
     FROM `students` 
-    GROUP BY `enrolment_date`;  NON ESTRAPOLO L'ANNO/////////////////////////////////////////////////////
-
+    GROUP BY YEAR(`enrolment_date`);  
 # 2 Contare gli insegnanti che hanno l'ufficio nello stesso edificio
 
     SELECT COUNT(`id`), `office_address` 
@@ -50,7 +49,22 @@
 
 # 4 Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
 
+    SELECT `students`.`name`, `students`.`surname`, `degrees`.* 
+    FROM `students` 
+    LEFT JOIN `degrees` 
+    ON `students`.`degree_id` = `degrees`.`id` 
+    ORDER BY `students`.`surname`;
+
 # 5 Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
+
+    SELECT `degrees`.`name`, `courses`.`name`, `teachers`.`name`, `teachers`.`surname` 
+    FROM `degrees` 
+    LEFT JOIN `courses` 
+    ON `courses`.`degree_id` = `degrees`.`id` 
+    LEFT JOIN `course_teacher` 
+    ON `course_teacher`.`course_id` = `courses`.`id` 
+    LEFT JOIN `teachers` 
+    ON `course_teacher`.`teacher_id` = `teachers`.`id`;
 
 # 6 Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
 
