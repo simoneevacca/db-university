@@ -27,7 +27,8 @@
 # 1 Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 
     SELECT `students`.* 
-    FROM `degrees` INNER JOIN `students` 
+    FROM `degrees` 
+    INNER JOIN `students` 
     ON `students`.`degree_id` = `degrees`.`id` 
     WHERE `degrees`.`name` = 'Corso di Laurea in Economia';    
 
@@ -67,5 +68,17 @@
     ON `course_teacher`.`teacher_id` = `teachers`.`id`;
 
 # 6 Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
+
+    SELECT `teachers`.`name`, `teachers`.`surname` 
+    FROM `teachers` 
+    LEFT JOIN `course_teacher` 
+    ON `course_teacher`.`teacher_id` = `teachers`.`id` 
+    LEFT JOIN `courses` 
+    ON `course_teacher`.`course_id` = `courses`.`id` 
+    LEFT JOIN `degrees` 
+    ON `courses`.`degree_id` = `degrees`.`id` 
+    LEFT JOIN `departments` 
+    ON `degrees`.`department_id` = `departments`.`id` 
+    WHERE `departments`.`name` = 'Dipartimento di Matematica';
 
 # 7 BONUS: Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente filtrare i tentativi con voto minimo 18.
